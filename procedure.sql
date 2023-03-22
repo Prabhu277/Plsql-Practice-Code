@@ -50,3 +50,23 @@ execute get_emp;
 /
 select text from user_source where name = 'GET_EMP';
 /
+--IN AND OUT
+declare
+    a number;
+    b number;
+    c number;
+procedure findmin(x in number, y in number, z out number) is
+begin
+    if x<y then
+        z:=x;
+    else
+        z:=y;
+    end if;
+End;
+begin
+    a :=20;
+    b:=10;
+    findmin(a,b,c);
+    dbms_output.put_line('Minimum of (a , b) :' || c);
+end;
+/
