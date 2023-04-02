@@ -33,7 +33,7 @@ select salary into sal from employee
 where employee_id = e_id;
 end;
 /
-execute get_sal(4, :n1);
+execute get_sal(1, :n1);
 /
 print n1;
 /
@@ -69,4 +69,26 @@ begin
     findmin(a,b,c);
     dbms_output.put_line('Minimum of (a , b) :' || c);
 end;
+/
+--procedure if loop
+create or replace procedure withdraw(p_no number,p_amt number)
+is
+v_bal number(10);
+begin
+select salary into v_bal from employee
+where p_no=employee_id;
+if p_amt<v_bal then
+update employee set salary=salary-p_amt where p_no=employee_id;
+dbms_output.put_line('Transaction Successfull');
+else
+dbms_output.put_line('Insufficent Funds');
+end if;
+end;
+/
+execute withdraw(1,40000);
+/
+set serveroutput on;
+execute withdraw(1, 5000);
+/
+desc employee;
 /
